@@ -1,0 +1,30 @@
+// Wedding Date: 03 January 2027 - 11:30 AM
+const weddingDate = new Date("January 3, 2027 11:30:00").getTime();
+
+function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = weddingDate - now;
+
+    if (distance <= 0) {
+        document.getElementById("countdown").innerHTML =
+            "<h2>💍 Today is our Wedding Day! 💖</h2>";
+        return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("countdown").innerHTML = `
+        <div class="timer">
+            <div><span>${days}</span><small>Days</small></div>
+            <div><span>${hours}</span><small>Hours</small></div>
+            <div><span>${minutes}</span><small>Minutes</small></div>
+            <div><span>${seconds}</span><small>Seconds</small></div>
+        </div>
+    `;
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
